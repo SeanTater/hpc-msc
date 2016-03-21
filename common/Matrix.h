@@ -165,6 +165,12 @@ void mat_write_text(Matrix mat, char* filename) {
  * Operations on Matrices
  */
 
+Matrix mat_copy(Matrix in) {
+  Matrix mat = mat_new(in.rows, in.cols);
+  memcpy(in.mat, mat.mat, in.rows*in.cols*sizeof(float));
+  return mat;
+}
+
 /** Zero out a matrix */
 Matrix mat_zero(Matrix in) {
   const int size = in.cols * in.rows;
@@ -190,7 +196,7 @@ inline Vec3 add3(Vec3 a, Vec3 b) {
   Vec3 c = a;
   c.x += b.x;
   c.y += b.y;
-  c.z += c.z;
+  c.z += b.z;
   return c;
 }
 inline Vec4 add4(Vec4 a, Vec4 b) {
@@ -201,5 +207,93 @@ inline Vec4 add4(Vec4 a, Vec4 b) {
   c.t += b.t;
   return c;
 }
+
+/* Subtract two vectors */
+inline Vec2 sub2(Vec2 a, Vec2 b) {
+  Vec2 c = a;
+  c.x -= b.x;
+  c.y -= b.y;
+  return c;
+}
+inline Vec3 sub3(Vec3 a, Vec3 b) {
+  Vec3 c = a;
+  c.x -= b.x;
+  c.y -= b.y;
+  c.z -= b.z;
+  return c;
+}
+inline Vec4 sub4(Vec4 a, Vec4 b) {
+  Vec4 c = a;
+  c.x -= b.x;
+  c.y -= b.y;
+  c.z -= b.z;
+  c.t -= b.t;
+  return c;
+}
+
+/* Find distance between two vectors */
+inline float euclid2(Vec2 a, Vec2 b) {
+  return ((a.x-b.x) * (a.x-b.x)) +
+         ((a.y-b.y) * (a.y-b.y));
+}
+inline float euclid3(Vec2 a, Vec2 b) {
+  return ((a.x-b.x) * (a.x-b.x)) +
+         ((a.y-b.y) * (a.y-b.y)) +
+         ((a.z-b.z) * (a.z-b.z));
+}
+inline float euclid4(Vec2 a, Vec2 b) {
+  return ((a.x-b.x) * (a.x-b.x)) +
+         ((a.y-b.y) * (a.y-b.y)) +
+         ((a.z-b.z) * (a.z-b.z)) +
+         ((a.t-b.t) * (a.t-b.t));
+}
+
+/* Multiply two vectors */
+inline Vec2 mult2(Vec2 a, Vec2 b) {
+  Vec2 c = a;
+  c.x *= b.x;
+  c.y *= b.y;
+  return c;
+}
+inline Vec3 mult3(Vec3 a, Vec3 b) {
+  Vec3 c = a;
+  c.x *= b.x;
+  c.y *= b.y;
+  c.z *= b.z;
+  return c;
+}
+inline Vec4 mult4(Vec4 a, Vec4 b) {
+  Vec4 c = a;
+  c.x *= b.x;
+  c.y *= b.y;
+  c.z *= b.z;
+  c.t *= b.t;
+  return c;
+}
+
+/* scale two vectors */
+inline Vec2 scale2(Vec2 a, float b) {
+  Vec2 c = a;
+  c.x *= b;
+  c.y *= b;
+  return c;
+}
+inline Vec3 scale3(Vec3 a, float b) {
+  Vec3 c = a;
+  c.x *= b;
+  c.y *= b;
+  c.z *= b;
+  return c;
+}
+inline Vec4 scale4(Vec4 a, float b) {
+  Vec4 c = a;
+  c.x *= b;
+  c.y *= b;
+  c.z *= b;
+  c.t *= b;
+  return c;
+}
+
+
 
 #endif

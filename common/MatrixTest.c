@@ -71,7 +71,7 @@ void test_write() {
  mat_del(mat);
 }
 
-int main(int argc, char** argv) {
+void test_matrix() {
   test_read_text();
   test_write_text();
   test_read();
